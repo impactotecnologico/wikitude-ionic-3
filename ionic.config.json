@@ -1,0 +1,8 @@
+{
+  "name": "wiki-demo1",
+  "app_id": "net.impactotecnologico.ra.wikitudeionic3",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
