@@ -31,7 +31,7 @@ Para ejecutar este ejemplo se tienen imagenes de ejemplo para reconocer en la ca
 La carpeta assets del proyecto debe tener una carpeta con nombre "wikitude" (puede cambiarse en todos los lugares donde se utilice) donde estarán los assets para realidad aumentada: 
 
 + assets
- + Colección de targets: archivo wtc obtenido del Target Manager de Wikitude
- + Componentes para aumentar: conjunto de imágenes, vídeo, objetos 3D, etc
+  + Colección de targets: archivo wtc obtenido del Target Manager de Wikitude
+  + Componentes para aumentar: conjunto de imágenes, vídeo, objetos 3D, etc
 + js 
- + *.js: archivo o archivos js con el código de realidad aumentada de wikitude
+  + *.js: archivo o archivos js con el código de realidad aumentada de wikitude
