@@ -1,5 +1,8 @@
 var World = {
 	loaded: false,
+	rotating: false,
+	resourcesLoaded: false,
+	resource3DLoaded: false,
 
 	init: function initFn() {
 		this.createOverlays();
@@ -13,8 +16,16 @@ var World = {
 		*/
 
 		this.targetCollectionResource = new AR.TargetCollectionResource("assets/propios.wtc", {
+			onLoaded: function () {
+				World.resourcesLoaded = true;
+				this.worldLoaded;
+			},
 		});
 
+
+		/*
+			onTargetsLoaded: en este punto se carga la función que muestra la capa de instrucciones => this.worldLoaded
+		*/
 		this.tracker = new AR.ImageTracker(this.targetCollectionResource, {
 			onTargetsLoaded: this.worldLoaded,
             onError: function(errorMessage) {
@@ -77,6 +88,27 @@ var World = {
 			}
 		});
 
+		// Inclusión de Objeto 3D
+		this.modelCar = new AR.Model("assets/corazon3D.wt3", {
+			onLoaded: function () {
+				World.resource3DLoaded = true;
+				this.removeloading3DWorld;
+			},
+			scale: {
+				x: 0.045,
+				y: 0.045,
+				z: 0.045
+			},
+			translate: {
+				x: 0.8,
+				y: 0.8,
+				z: 0.8
+			},
+			rotate: {
+				roll: -25
+			}
+		});
+
 
 		/*
 			La clase ImageTrackable representa al elemento que une los elementos aumentados 
@@ -96,7 +128,7 @@ var World = {
 
 		var logoJD = new AR.ImageTrackable(this.tracker, "logo-jdrone-isotipo", {
 			drawables: {
-				cam: [overlayOne, pageOneButton, htmlElement]
+				cam: [overlayOne, pageOneButton, this.modelCar]
 			},
 			onImageRecognized: this.removeLoadingBar,
             onError: function(errorMessage) {
@@ -124,6 +156,9 @@ var World = {
             }
 		});
 
+
+		
+
 	},
 
 	createWwwButton: function createWwwButtonFn(url, size, options) {
@@ -148,6 +183,17 @@ var World = {
 			e.parentElement.removeChild(e);
 			World.loaded = true;
 		}
+	},
+
+	removeloading3DWorld: function removeloading3DWorldFn(){		
+		if (World.removeloading3DWorld) {
+			var e = document.getElementById('3DloadingMessage');			
+			e.parentElement.removeChild(e);
+		}
+	},
+
+	loading3DWorld: function loading3DWorldFn() {
+		var e = document.getElementById('3DloadingMessage');
 	},
 
 	worldLoaded: function worldLoadedFn() {
