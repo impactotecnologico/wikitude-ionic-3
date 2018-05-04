@@ -35,3 +35,9 @@ La carpeta assets del proyecto debe tener una carpeta con nombre "wikitude" (pue
   + Componentes para aumentar: conjunto de imágenes, vídeo, objetos 3D, etc
 + js 
   + *.js: archivo o archivos js con el código de realidad aumentada de wikitude
+
+## Demo
+
+En este vídeo puede verse un ejemplo de uso:
+
+![Demo](http://technoimpact.net/impact/Demo.mp4)
