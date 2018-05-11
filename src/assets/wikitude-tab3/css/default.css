@@ -12,16 +12,8 @@
 	display: table;
 }
 
-.dist {
-	font-size: large;
-	position: absolute;
-	width: 100%;
-	padding-top: 12px;
-	padding-bottom: 12px;
-	background-color: #EEEEEE;
-	text-align: center;
+.atBottom {
+	position: relative;
 	bottom: 0;
-	left: 0;
-	opacity: 0.7;
 	display: table;
 }

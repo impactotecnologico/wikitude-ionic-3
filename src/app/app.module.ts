@@ -1,21 +1,21 @@
-import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
-
-import { ImageRecognitionPage } from '../pages/image-recognition/image-recognition';
-import { ContactPage } from '../pages/contact/contact';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { HomePage } from '../pages/home/home';
+import { ImageRecognitionPage } from '../pages/image-recognition/image-recognition';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { MyApp } from './app.component';
+import { Overloaping3D } from './../pages/overloaping-3D/overloaping-3D';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 import { TabsPage } from '../pages/tabs/tabs';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+
 
 @NgModule({
   declarations: [
     MyApp,
     ImageRecognitionPage,
-    ContactPage,
+    Overloaping3D,
     HomePage,
     TabsPage
   ],
@@ -27,7 +27,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     ImageRecognitionPage,
-    ContactPage,
+    Overloaping3D,
     HomePage,
     TabsPage
   ],
