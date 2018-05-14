@@ -30,15 +30,7 @@ var World = {
 			onTargetsLoaded: this.worldLoaded,
             onError: function(errorMessage) {
             	alert("OnError: " + errorMessage);
-            },
-			distanceToTarget: {
-				changedThreshold: 1,
-				onDistanceChanged: function(distance) {
-					alert("distance: " + distance);
-					document.getElementById('distanceDisplay').innerHTML = "Distance from target: " + distance / 10 + " cm";
-					overlayOne.rotate.z = distance;
-				}
-			}
+            }
 		});
 
 		/*

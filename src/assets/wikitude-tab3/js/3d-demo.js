@@ -26,48 +26,11 @@ var World = {
 		/*
 			onTargetsLoaded: en este punto se carga la función que muestra la capa de instrucciones => this.worldLoaded
 		*/
-		this.tracker = new AR.ImageTracker(this.targetCollectionResource,"*", {
+		this.tracker = new AR.ImageTracker(this.targetCollectionResource, {
 			onTargetsLoaded: this.worldLoaded,
             onError: function(errorMessage) {
             	alert("OnError: " + errorMessage);
-            },
-			distanceToTarget: {
-				changedThreshold: 1,
-				onDistanceChanged: function(distance) {
-					alert("distance: " + distance);
-					document.getElementById('distanceDisplay').innerHTML = "Distance from target: " + distance / 10 + " cm";
-					overlayOne.rotate.z = distance;
-				}
-			}
-		});
-
-		/*
-			Creación de primer elemento a superponer: 
-			Imagen ubicada según coordenadas x & y. 
-			El valor corresponde de forma proporcional al tamaño de la imagen reconocida.
-			Si se asigna 1.0 a X, se posiciona desde el centro hacia la derecha una vez el tamaño de la imagen reconocida
-		*/
-		var imgOne = new AR.ImageResource("assets/one.png");
-		var overlayOne = new AR.ImageDrawable(imgOne, 1, {
-			translate: {
-				x: -1.0,
-				y: -1.0
-			},
-			rotate : { z: 90 },
-			onClick : function() {
-				this.rotate.z += 10;
-			},
-			zOrder: 1
-		});
-
-		// Creación de botón. Puede apuntar a una url, no es obligatorio
-		this.imgButton = new AR.ImageResource("assets/BOTON.png");
-		var pageOneButton = this.createWwwButton("http://www.impactotecnologico.net", 0.15, {
-			translate: {
-				x: 0.5,
-				y: 0.0
-			},
-			zOrder: 2
+            }
 		});
 
 		/*
@@ -82,11 +45,11 @@ var World = {
 
 		var htmlElement = new AR.HtmlDrawable({
 			uri: "http://technoimpact.net/impact/signature/"
-		}, 1.0, {
+		}, 1.5, {
 			viewportWidth: 820,
 			viewportHeight: 670,
 			backgroundColor: "#FFFFFF",
-			translate: { x: 1.0, y: 1.0 },
+			translate: { x: -2.0, y: -4.0 },
 			horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.RIGHT,
 			verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP,
 			clickThroughEnabled: true,
@@ -126,7 +89,7 @@ var World = {
 		*/
 		var logoTecnoboda = new AR.ImageTrackable(this.tracker, "POSITIVO A COLOR ISOTIPO", {
 			drawables: {
-				cam: [overlayOne, pageOneButton, htmlElement]
+				cam: [htmlElement]
 			},
 			onImageRecognized: this.removeLoadingBar,
             onError: function(errorMessage) {
@@ -136,17 +99,7 @@ var World = {
 
 		var logoJD = new AR.ImageTrackable(this.tracker, "logo-jdrone-isotipo", {
 			drawables: {
-				cam: [overlayOne, pageOneButton, this.modelCar]
-			},
-			onImageRecognized: this.removeLoadingBar,
-            onError: function(errorMessage) {
-            	alert(errorMessage);
-            }
-		});
-
-		var logoIT = new AR.ImageTrackable(this.tracker, "favicon-3d", {
-			drawables: {
-				cam: [overlayOne, pageOneButton, htmlElement]
+				cam: [htmlElement]
 			},
 			onImageRecognized: this.removeLoadingBar,
             onError: function(errorMessage) {
@@ -156,7 +109,7 @@ var World = {
 
 		var logoCDI = new AR.ImageTrackable(this.tracker, "CDI Isotipo I", {
 			drawables: {
-				cam: [overlayOne, pageOneButton, htmlElement]
+				cam: [this.modelCar]
 			},
 			onImageRecognized: this.removeLoadingBar,
             onError: function(errorMessage) {
@@ -167,19 +120,6 @@ var World = {
 
 		
 
-	},
-
-	createWwwButton: function createWwwButtonFn(url, size, options) {
-	/*
-		Los botones requieren que se pase el evento con options.onClick para que sea 
-		clicleable. La función que se ejecuta puede tener el comportamiento que se quiera,
-		en este caso abrir una url
-
-	*/
-		options.onClick = function() {
-			AR.context.openInBrowser(url);
-		};
-		return new AR.ImageDrawable(this.imgButton, size, options);
 	},
 
 	/*
@@ -193,16 +133,6 @@ var World = {
 		}
 	},
 
-	removeloading3DWorld: function removeloading3DWorldFn(){		
-		if (World.removeloading3DWorld) {
-			var e = document.getElementById('3DloadingMessage');			
-			e.parentElement.removeChild(e);
-		}
-	},
-
-	loading3DWorld: function loading3DWorldFn() {
-		var e = document.getElementById('3DloadingMessage');
-	},
 
 	worldLoaded: function worldLoadedFn() {
 		var cssDivInstructions = " style='display: table-cell;vertical-align: middle; text-align: right; width: 50%; padding-right: 15px;'";
