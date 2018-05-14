@@ -80,6 +80,20 @@ var World = {
 			}
 		});
 
+		// Inclusión de flecha
+		var arrow = new AR.ImageResource("assets/flecha.png");
+		var arrowAR = new AR.ImageDrawable(arrow, 1, {
+			translate: {
+				x: 0.0,
+				y: -4.0
+			},
+			
+			onClick : function() {
+				// this.rotate.z += 10;
+			},
+			zOrder: 1
+		});
+
 
 		/*
 			La clase ImageTrackable representa al elemento que une los elementos aumentados 
@@ -89,7 +103,7 @@ var World = {
 		*/
 		var logoTecnoboda = new AR.ImageTrackable(this.tracker, "POSITIVO A COLOR ISOTIPO", {
 			drawables: {
-				cam: [htmlElement]
+				cam: [htmlElement, arrowAR]
 			},
 			onImageRecognized: this.removeLoadingBar,
             onError: function(errorMessage) {
