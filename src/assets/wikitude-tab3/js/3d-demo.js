@@ -84,8 +84,8 @@ var World = {
 		var arrow = new AR.ImageResource("assets/flecha.png");
 		var arrowAR = new AR.ImageDrawable(arrow, 1, {
 			translate: {
-				x: 0.0,
-				y: -4.0
+				x: -0.45,
+				y: -5.3
 			},
 			
 			onClick : function() {
