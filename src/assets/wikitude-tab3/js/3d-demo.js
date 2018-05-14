@@ -3,6 +3,7 @@ var World = {
 	rotating: false,
 	resourcesLoaded: false,
 	resource3DLoaded: false,
+	arrow: false,
 
 	init: function initFn() {
 		this.createOverlays();
@@ -82,7 +83,7 @@ var World = {
 
 		// Inclusión de flecha
 		var arrow = new AR.ImageResource("assets/flecha.png");
-		var arrowAR = new AR.ImageDrawable(arrow, 1, {
+		World.arrow = new AR.ImageDrawable(arrow, 1, {
 			translate: {
 				x: -0.3,
 				y: -4.8
@@ -91,6 +92,7 @@ var World = {
 			onClick : function() {
 				// this.rotate.z += 10;
 			},
+			enabled: false,
 			zOrder: 1
 		});
 
@@ -103,7 +105,7 @@ var World = {
 		*/
 		var logoTecnoboda = new AR.ImageTrackable(this.tracker, "POSITIVO A COLOR ISOTIPO", {
 			drawables: {
-				cam: [htmlElement, arrowAR]
+				cam: [htmlElement, World.arrow]
 			},
 			onImageRecognized: this.removeLoadingBar,
             onError: function(errorMessage) {
@@ -155,6 +157,8 @@ var World = {
 			"<div" + cssDivInstructions + ">Escanea cada logo individual</div>" +
 			"<div" + cssDiv1 + "><img src='assets/cdi.png'></img> <img src='assets/jdrone.png'></img></div>" +
 			"<div" + cssDiv1 + "><img src='assets/tecnoboda.jpg'></img> <img src='assets/it3d.jpg'></img> </div>" ;
+
+		document.getElementById('b3').addEventListener('click', function() { World.arrow.enabled = true; }, false);
 	}
 };
 
