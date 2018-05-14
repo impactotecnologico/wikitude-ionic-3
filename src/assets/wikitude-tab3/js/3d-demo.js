@@ -49,7 +49,7 @@ var World = {
 			viewportWidth: 820,
 			viewportHeight: 670,
 			backgroundColor: "#FFFFFF",
-			translate: { x: -2.0, y: -4.0 },
+			translate: { x: -2.2, y: -4.2 },
 			horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.RIGHT,
 			verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP,
 			clickThroughEnabled: true,
@@ -84,10 +84,10 @@ var World = {
 		var arrow = new AR.ImageResource("assets/flecha.png");
 		var arrowAR = new AR.ImageDrawable(arrow, 1, {
 			translate: {
-				x: -0.45,
-				y: -5.3
+				x: -0.3,
+				y: -4.8
 			},
-			
+			rotate : { z: 45 },
 			onClick : function() {
 				// this.rotate.z += 10;
 			},
