@@ -26,7 +26,7 @@ export class ImageRecognitionPage {
       function(fail) {
         console.log("Failed to load ARchitect World!");
       },          
-      "www/assets/wikitude/index.html", 
+      "www/assets/wikitude-tab2/index.html", 
       ["ir"],  
       <JSON>startupConfiguration
     );
