@@ -52,9 +52,9 @@ var World = {
 			viewportHeight: 700,
 			backgroundColor: "#FFFFFF",
 			translate: { 
-				x: -2.2, 
-				y: -2.2, 
-				z: 4.0 
+				x: -1.2, 
+				y: -2.0, 
+				z: 3.9 
 			},
 			horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.RIGHT,
 			verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP,
@@ -66,7 +66,7 @@ var World = {
 		});
 
 		// Inclusión de Objeto 3D
-		this.desfibrilador = new AR.Model("assets/desfibrilador.wt3", {
+		this.desfibrilador = new AR.Model("assets/3dmodels/desfibrilador.wt3", {
 			onLoaded: function () {
 				
 			},
@@ -76,34 +76,34 @@ var World = {
 				z: 0.038
 			},
 			rotate: {
-				x: -75,
+				x: -90,
 				y: -14.0,
-				z: 0.0
+				z: -10
 			},
 			translate: {
 				x: -1.2,
 				y: -1.8,
-				z: 1.9
+				z: 1.0
 			},
 			zOrder: 0
 		});
 
 		// Inclusión de flecha 3D
-		this.arrow3D = new AR.Model("assets/arrow.wt3", {
+		World.arrow3D = new AR.Model("assets/3dmodels/arrow.wt3", {
 			scale: {
-				x: 0.010,
-				y: 0.010,
-				z: 0.010
+				x: 0.013,
+				y: 0.013,
+				z: 0.013
 			},
 			rotate: {
-				x: -70,
-				y: -14.0,
-				z: -2.0
+				x: -80,
+				y: 34.0,
+				z: -8.0
 			},
 			translate: {
-				x: -1.2,
-				y: -1.8,
-				z: 1.5
+				x: -2.2,
+				y: -1.0,
+				z: 1.6
 			},
 			enabled: false,
 			zOrder: 1
@@ -155,7 +155,7 @@ var World = {
 		var logoCDI = new AR.ImageTrackable(this.tracker, "CDI Isotipo I", {
 			enableExtendedTracking: true,
 			drawables: {
-				cam: [this.desfibrilador, this.arrow3D]
+				cam: [this.desfibrilador, World.arrow3D]
 			},
 			onImageRecognized: this.removeLoadingBar,
             onError: function(errorMessage) {
@@ -222,7 +222,7 @@ var World = {
 		}, false);
 
 		//boton 2
-		document.getElementById('b1').addEventListener('click', function() { 
+		document.getElementById('b2').addEventListener('click', function() { 
 			World.arrow.enabled = false; 
 			World.arrow3D.enabled = false; 
 		}, false);

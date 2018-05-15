@@ -1,3 +1,4 @@
+import { Animation } from './../pages/animation/animation';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HomePage } from '../pages/home/home';
@@ -17,6 +18,7 @@ import { TabsPage } from '../pages/tabs/tabs';
     ImageRecognitionPage,
     Overloaping3D,
     HomePage,
+    Animation,
     TabsPage
   ],
   imports: [
@@ -29,6 +31,7 @@ import { TabsPage } from '../pages/tabs/tabs';
     ImageRecognitionPage,
     Overloaping3D,
     HomePage,
+    Animation,
     TabsPage
   ],
   providers: [

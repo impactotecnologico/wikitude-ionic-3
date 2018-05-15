@@ -61,7 +61,7 @@ var World = {
 		});
 
 		// Inclusión de Objeto 3D
-		this.modelCar = new AR.Model("assets/corazon3D.wt3", {
+		this.modelCar = new AR.Model("assets/3dmodels/corazon3D.wt3", {
 			onLoaded: function () {
 				World.resource3DLoaded = true;
 				this.removeloading3DWorld;

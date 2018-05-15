@@ -1,3 +1,4 @@
+import { Animation } from './../animation/animation';
 import { Component } from '@angular/core';
 import { HomePage } from '../home/home';
 import { ImageRecognitionPage } from '../image-recognition/image-recognition';
@@ -12,6 +13,7 @@ export class TabsPage {
   tab1Root = HomePage;
   tab2Root = ImageRecognitionPage;
   tab3Root = Overloaping3D;
+  tab4Root = Animation
 
   constructor() {
 
