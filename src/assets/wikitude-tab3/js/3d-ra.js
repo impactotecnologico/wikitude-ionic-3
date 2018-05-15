@@ -4,6 +4,7 @@ var World = {
 	resourcesLoaded: false,
 	resource3DLoaded: false,
 	arrow: false,
+	arrow3D: false,
 
 	init: function initFn() {
 		this.createOverlays();
@@ -46,11 +47,15 @@ var World = {
 
 		var htmlElement = new AR.HtmlDrawable({
 			uri: "assets/html/info1.html"
-		}, 1.5, {
+		}, 1.8, {
 			viewportWidth: 900,
 			viewportHeight: 700,
 			backgroundColor: "#FFFFFF",
-			translate: { x: -2.2, y: -4.2 },
+			translate: { 
+				x: -2.2, 
+				y: -2.2, 
+				z: 4.0 
+			},
 			horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.RIGHT,
 			verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP,
 			clickThroughEnabled: true,
@@ -66,22 +71,45 @@ var World = {
 				
 			},
 			scale: {
-				x: 0.035,
-				y: 0.035,
-				z: 0.035
+				x: 0.038,
+				y: 0.038,
+				z: 0.038
 			},
 			rotate: {
-				x: -80,
-				y: -14.0
+				x: -75,
+				y: -14.0,
+				z: 0.0
 			},
 			translate: {
-				x: 0.8,
-				y: -0.8,
-				z: 0
-			}
+				x: -1.2,
+				y: -1.8,
+				z: 1.9
+			},
+			zOrder: 0
 		});
 
-		// Inclusión de flecha
+		// Inclusión de flecha 3D
+		this.arrow3D = new AR.Model("assets/arrow.wt3", {
+			scale: {
+				x: 0.010,
+				y: 0.010,
+				z: 0.010
+			},
+			rotate: {
+				x: -70,
+				y: -14.0,
+				z: -2.0
+			},
+			translate: {
+				x: -1.2,
+				y: -1.8,
+				z: 1.5
+			},
+			enabled: false,
+			zOrder: 1
+		});
+
+		// Inclusión de flecha 2D
 		var arrow = new AR.ImageResource("assets/flecha.png");
 		World.arrow = new AR.ImageDrawable(arrow, 1, {
 			translate: {
@@ -104,6 +132,7 @@ var World = {
 			para reconocer en el escaneo
 		*/
 		var logoTecnoboda = new AR.ImageTrackable(this.tracker, "POSITIVO A COLOR ISOTIPO", {
+			enableExtendedTracking: true,
 			drawables: {
 				cam: [htmlElement, World.arrow]
 			},
@@ -124,13 +153,41 @@ var World = {
 		});
 
 		var logoCDI = new AR.ImageTrackable(this.tracker, "CDI Isotipo I", {
+			enableExtendedTracking: true,
 			drawables: {
-				cam: [this.desfibrilador]
+				cam: [this.desfibrilador, this.arrow3D]
 			},
 			onImageRecognized: this.removeLoadingBar,
             onError: function(errorMessage) {
             	alert(errorMessage);
-            }
+			},
+			onExtendedTrackingQualityChanged: function (targetName, oldTrackingQuality, newTrackingQuality) {
+
+				var newBackgroundClass;
+
+				switch(newTrackingQuality) {
+					case -1:
+						newBackgroundClass = 'trackingBad';
+						break;
+					case 0:
+						newBackgroundClass = 'trackingMedium';
+						break;
+					default:
+						newBackgroundClass = 'trackingGood';
+						break;
+				}
+
+				var trackingIndicatorDiv = document.getElementById('trackingIndicator');
+
+				if (this.backgroundClass) {
+					trackingIndicatorDiv.classList.remove(this.backgroundClass);
+				}
+
+				this.backgroundClass = newBackgroundClass;
+
+				// add color indication class to the trackingIndicator div
+				trackingIndicatorDiv.classList.add(this.backgroundClass);
+			}
 		});
 
 
@@ -158,6 +215,19 @@ var World = {
 			"<div" + cssDiv1 + "><img src='assets/cdi.png'></img> <img src='assets/jdrone.png'></img></div>" +
 			"<div" + cssDiv1 + "><img src='assets/tecnoboda.jpg'></img> <img src='assets/it3d.jpg'></img> </div>" ;
 
+		//boton 1
+		document.getElementById('b1').addEventListener('click', function() { 
+			World.arrow.enabled = false; 
+			World.arrow3D.enabled = true; 
+		}, false);
+
+		//boton 2
+		document.getElementById('b1').addEventListener('click', function() { 
+			World.arrow.enabled = false; 
+			World.arrow3D.enabled = false; 
+		}, false);
+		
+		
 		//boton 3
 		document.getElementById('b3').addEventListener('click', function() { 
 			World.arrow.enabled = true; 
