@@ -39,9 +39,9 @@ var World = {
 				
 			},
 			scale: {
-				x: 0.038,
-				y: 0.038,
-				z: 0.038
+				x: 0.388,
+				y: 0.388,
+				z: 0.388
 			},
 			rotate: {
 				x: -90,
@@ -50,11 +50,14 @@ var World = {
 			},
 			translate: {
 				x: -1.2,
-				y: -1.8,
+				y: 1.8,
 				z: 1.0
 			},
 			zOrder: 0
 		});
+
+		// Creación de elemento de animación
+		this.appearingAnimation = this.createAppearingAnimation(this.horno, 0.045);
 
 	
 		/*
@@ -86,6 +89,20 @@ var World = {
 
 	},
 
+	createAppearingAnimation: function createAppearingAnimationFn(model, scale) {
+		var sx = new AR.PropertyAnimation(model, "scale.x", 0, scale, 1500, {
+			type: AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC
+		});
+		var sy = new AR.PropertyAnimation(model, "scale.y", 0, scale, 1500, {
+			type: AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC
+		});
+		var sz = new AR.PropertyAnimation(model, "scale.z", 0, scale, 1500, {
+			type: AR.CONST.EASING_CURVE_TYPE.EASE_OUT_ELASTIC
+		});
+
+		return new AR.AnimationGroup(AR.CONST.ANIMATION_GROUP_TYPE.PARALLEL, [sx, sy, sz]);
+	},
+
 	/*
 		Función para ocultar la capa de información
 	*/
@@ -103,7 +120,8 @@ var World = {
 		var cssDiv1 = " style='display: table-cell;vertical-align: middle; text-align: left; padding-right: 15px; width: 38px'";
 		document.getElementById('loadingMessage').innerHTML =
 			"<div" + cssDivInstructions + ">Escanea cualquiera de los logos</div>" +
-			"<div" + cssDiv1 + "><img src='assets/tecnoboda.png'></img> <img src='assets/jdrone.png'></img></div>";
+			"<div" + cssDiv1 + "><img src='assets/tecnoboda.jpg'></img> <img src='assets/jdrone.png'></img></div>";
+		//World.appearingAnimation.start();
 	}
 };
 
