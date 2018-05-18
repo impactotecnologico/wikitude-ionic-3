@@ -5,6 +5,8 @@ var World = {
 	resource3DLoaded: false,
 	arrow: false,
 	arrow3D: false,
+	htmlPerilla: false,
+	perillaFija: false,
 
 	init: function initFn() {
 		this.createOverlays();
@@ -65,6 +67,27 @@ var World = {
 			}
 		});
 
+		World.htmlPerilla = new AR.HtmlDrawable({
+			uri: "assets/html/info_perilla1.html"
+		}, 1.8, {
+			viewportWidth: 400,
+			viewportHeight: 120,
+			backgroundColor: "#FFFFFF",
+			translate: { 
+				x: -0.2, 
+				y: 0.5, 
+				z: 2.0 
+			},
+			enabled: false,
+			horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.RIGHT,
+			verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP,
+			clickThroughEnabled: true,
+			allowDocumentLocationChanges: false,
+			onDocumentLocationChanged: function onDocumentLocationChangedFn(uri) {
+				AR.context.openInBrowser(uri);
+			}
+		});
+
 		// Inclusión de Objeto 3D
 		this.desfibrilador = new AR.Model("assets/3dmodels/desfibrilador.wt3", {
 			onLoaded: function () {
@@ -98,15 +121,48 @@ var World = {
 			rotate: {
 				x: -80,
 				y: 34.0,
-				z: -8.0
+				z: -2.0
 			},
 			translate: {
-				x: -2.2,
-				y: -1.0,
+				x: -1.95,
+				y: -0.9,
 				z: 1.6
 			},
 			enabled: false,
 			zOrder: 1
+		});
+
+		// Inclusión de flecha perilla fija 3D
+
+		/*
+		rotate: {
+				x: -84,
+				y: 3.0,
+			},
+			translate: {
+				x: 0.0,
+				y: 3.0,
+				z: 1.6
+			},
+		
+		*/
+		World.perillaFija = new AR.Model("assets/3dmodels/perilla_movimiento.wt3", {
+			scale: {
+				x: 0.058,
+				y: 0.058,
+				z: 0.058
+			},
+			rotate: {
+				x: -84,
+				y: 3.0,
+			},
+			translate: {
+				x: -1.3,
+				y: -2.2,
+				z: 2.6
+			},
+			enabled: false,
+			zOrder: 2
 		});
 
 		// Inclusión de flecha 2D
@@ -151,11 +207,11 @@ var World = {
             	alert(errorMessage);
             }
 		});
-
+		//this.desfibrilador, 
 		var logoCDI = new AR.ImageTrackable(this.tracker, "CDI Isotipo I", {
 			enableExtendedTracking: true,
 			drawables: {
-				cam: [this.desfibrilador, World.arrow3D]
+				cam: [this.desfibrilador, World.arrow3D, World.htmlPerilla, World.perillaFija]
 			},
 			onImageRecognized: this.removeLoadingBar,
             onError: function(errorMessage) {
@@ -217,14 +273,33 @@ var World = {
 
 		//boton 1
 		document.getElementById('b1').addEventListener('click', function() { 
-			World.arrow.enabled = false; 
-			World.arrow3D.enabled = true; 
+			if (World.arrow3D.enabled == true ) {
+				World.arrow3D.enabled = false; 
+			} else {
+				World.arrow3D.enabled = true; 	
+			}
+
+
+			
 		}, false);
 
 		//boton 2
 		document.getElementById('b2').addEventListener('click', function() { 
-			World.arrow.enabled = false; 
-			World.arrow3D.enabled = false; 
+			
+			if (World.htmlPerilla.enabled == true) {
+				World.htmlPerilla.enabled = false;
+				World.perillaFija.enabled = false;
+			} else {
+				World.htmlPerilla.enabled = true;
+				World.perillaFija.enabled = true;
+
+			}
+
+			if (World.arrow3D.enabled == true ) {
+				World.arrow3D.enabled = false; 
+			} else {
+				World.arrow3D.enabled = true; 	
+			}
 		}, false);
 		
 		
